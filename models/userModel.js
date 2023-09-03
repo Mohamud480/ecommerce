@@ -3,30 +3,30 @@ import mongoose from "mongoose";
 const userschema=mongoose.Schema({
     name:{
         type:String,
-        require:true
+        required:true
     },
     email:{
         type:String,
-        require:true
+        required:true
     },
     password:{
         type:String,
-        require:true
+        required:true
     },
     phone:{
         type:Number,
-        require:true
+        required:true
     },
     address:{
         type:String,
-        require:true
+        required:true
     },
     isAdmin:{
         type:Boolean,
-        require:true,
+        required:true,
         default:false
 
     }
 })
-const users= mongoose.model("Users",userschema)
+const users= mongoose.model("users",userschema)
 export default users()

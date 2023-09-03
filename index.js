@@ -1,6 +1,6 @@
 import express from "express"
 import connectDB from "./Database/db.js"
-import userRoutes from './routes/user.Routs.js'
+import userRoutes from './routes/userRouts.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -8,7 +8,7 @@ connectDB()
  const app = express()
 
  app.use(express.json())
- app.use('/api/user',userRoutes)
+ app.use('/api/users',userRoutes)
 
 
 

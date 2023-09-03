@@ -1,15 +1,16 @@
+
+
 import userModel from "../models/userModel.js";
 import generateToken from "../utils/genratToken.js";
 
 
-export const register =async()=>{
-    const {name, email, address, phone}=req.body;
-    const userExists=user.findOne({email})
+export const register =async(req, res)=>{
+    const {name, email, password, address, phone}=req.body;
+    const userExists=await userModel.findOne({email})
     if(userExists){
         res.status(400).json({massage:'user already exists'})
     }
-
-    const user= Users.create({
+    else{const user= userModel.create({
         name, email, address, phone
 
     })
@@ -23,17 +24,22 @@ export const register =async()=>{
             address:user.address,
             token:generateToken(user._id)
         })
-    }else{
-        res.status(201).json({massage:'invilid user data'});
+
+    }
+    else{
+        res.status(401).json({massage:'invilid user data'});
 
     }
     
+
+    
+    }
 }
 export const login = async(req, res)=>{
     const{email, password} = req.body;
-    const user=Users.findOne({email});
+    const user=userModel.findOne({email});
 
-    if (user&& password==user.password){
+    if (user&& password == user.password){
         res.status(200).json({
             _id:user._id,
             name:user.name,
@@ -45,7 +51,7 @@ export const login = async(req, res)=>{
         })
 
     }else{
-        res.status(201).json({massage:'invilid u emai or password'});
+        res.status(404).json({massage:'invilid  emai or password'});
 
     }
 }
