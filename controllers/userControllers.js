@@ -37,7 +37,7 @@ export const register =async(req, res)=>{
 }
 export const login = async(req, res)=>{
     const{email, password} = req.body;
-    const user=userModel.findOne({email});
+    const user= await userModel.findOne({email});
 
     if (user&& password == user.password){
         res.status(200).json({
